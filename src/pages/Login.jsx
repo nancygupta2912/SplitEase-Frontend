@@ -10,6 +10,10 @@ function Login() {
     const navigate = useNavigate();
 
     const handleLogin = async () => {
+        if (!email.trim() || !password.trim()) {
+            alert("Please enter both email and password.");
+            return;
+        }
 
         try {
             const data = await login({
@@ -25,8 +29,29 @@ function Login() {
 
             navigate("/dashboard");
 
-        } catch (error) {
-            console.log(error.response.data);
+        }
+        catch (error) {
+
+            const message = error.response?.data?.message;
+
+            if (message === "User not found") {
+
+                alert("No user is registered with this email. Please sign up first.");
+
+            } else if (message === "Invalid password") {
+
+                alert("Incorrect password.");
+
+            } else if (message === "Invalid credentials") {
+
+                alert("Invalid email or password.");
+
+            } else {
+
+                alert(message || "Login failed. Please try again.");
+
+            }
+
         }
 
     };
