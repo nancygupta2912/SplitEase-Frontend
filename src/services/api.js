@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "https://splitease-backend-6ftk.onrender.com"
+    baseURL: "https://splitease-backend-6ftk.onrender.com/api"
 });
 
 
